@@ -1,4 +1,4 @@
-# Computer Pointer Controller
+# Smart Queuing System
 
 ## `About`
 Smart queuing system using openvino by Intel
