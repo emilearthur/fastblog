@@ -13,4 +13,4 @@ permalink: /about/
 
 
 
-📫 How to reach me **frederickauthur@hotmail.com**
+📫 How to reach me <frederickauthur@hotmail.com>
