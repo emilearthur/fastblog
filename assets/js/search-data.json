@@ -13,10 +13,10 @@
   
     
         ,"post1": {
-            "title": "People Counter App Edge",
-            "content": "People Counter App . About . The people counter application will demonstrate how to create a smart video IoT solution using Intel® hardware and software tools. The app will detect people in a designated area, providing the number of people in the frame, average duration of people in frame, and total count. . Project can be found https://github.com/emilearthur/nd131-openvino-fundamentals-project-starter_ .",
-            "url": "https://emilearthur.github.io/fastblog/2020/05/10/People-Counter-App-Edge.html",
-            "relUrl": "/2020/05/10/People-Counter-App-Edge.html",
+            "title": "People Counter App",
+            "content": "About . The people counter application will demonstrate how to create a smart video IoT solution using Intel® hardware and software tools. The app will detect people in a designated area, providing the number of people in the frame, average duration of people in frame, and total count. . Project can be found https://github.com/emilearthur/nd131-openvino-fundamentals-project-starter_ .",
+            "url": "https://emilearthur.github.io/fastblog/edge/python/intel/2020/05/10/People-Counter-App-Edge.html",
+            "relUrl": "/edge/python/intel/2020/05/10/People-Counter-App-Edge.html",
             "date": " • May 10, 2020"
         }
         
