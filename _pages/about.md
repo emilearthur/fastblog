@@ -14,4 +14,4 @@ permalink: /about/
 
 
 Reach me:
-[mailti](mailto:frederickatuhur@hotmail.com)
+[mailto](mailto:frederickatuhur@hotmail.com)
