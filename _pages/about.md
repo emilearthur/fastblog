@@ -4,7 +4,11 @@ title: About Me
 permalink: /about/
 ---
 <h1 align="center">Hi 👋, I'm Emile Bondzie-Arthur</h1>
-<h3 align="center">Currently running Product and IT at Fido MicroCredit Limited (B2C fintech company) in Accra, Ghana. Love Data and working with Data.</h3>
+<h2 align="left">
+  Currently running Product and IT at Fido MicroCredit Limited (B2C fintech company) in Accra, Ghana. Love Data and working with Data.
+  <p>Before Fido, I worked as an Assistant Project Manager at the Electricty Company of Ghana. Also, sometimes work with Omdena in using AI to solve social problems.</p>
+</h2>
+
 
 - 🌱 I’m currently learning **PyTorch & Deep Learning stuff, Fastai & More python**
 
@@ -16,6 +20,7 @@ Also, I am working on becoming a ML engineer or software engineer (data and anal
 
 
 📫 How to reach me <frederickauthur@hotmail.com>
-🔗Linkedin <https://www.linkedin.com/in/frederickemile>
+🔗 Linkedin <https://www.linkedin.com/in/frederickemile>
+💻 Kaggle <https://www.kaggle.com/frederickemile>
 
-Here is my [CV](https://drive.google.com/file/d/1cqqMyp8n_Vr1SkoBmCGHoIPPS_23iAyg/view?usp=sharing).
+Here is my [CV](https://drive.google.com/file/d/1cqqMyp8n_Vr1SkoBmCGHoIPPS_23iAyg/view?usp=sharing)
