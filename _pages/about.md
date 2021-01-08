@@ -20,7 +20,11 @@ Also, I am working on becoming a ML engineer or software engineer (data and anal
 
 
 📫 How to reach me <frederickauthur@hotmail.com>
+
+
 🔗 Linkedin <https://www.linkedin.com/in/frederickemile>
+
+
 💻 Kaggle <https://www.kaggle.com/frederickemile>
 
 Here is my [CV](https://drive.google.com/file/d/1cqqMyp8n_Vr1SkoBmCGHoIPPS_23iAyg/view?usp=sharing)
