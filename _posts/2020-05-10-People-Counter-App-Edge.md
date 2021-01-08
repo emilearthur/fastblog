@@ -1,4 +1,11 @@
-# People Counter App
+---
+toc: true
+layout: post
+<!---description: A minimal example of using markdown with fastpages.-->
+categories: [edge, python, intel]
+title: People Counter App
+---
+
 
 ## `About`
 The people counter application will demonstrate how to create a smart video IoT solution using Intel® hardware and software tools. 
