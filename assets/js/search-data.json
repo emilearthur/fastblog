@@ -2,10 +2,10 @@
   
     
         "post0": {
-            "title": "Smart Queuing System",
-            "content": "Computer Pointer Controller . About . Smart queuing system using openvino by Intel . Project can be found https://github.com/emilearthur/smart_queuing_system .",
-            "url": "https://emilearthur.github.io/fastblog/2020/07/28/smart-queuing-system.html",
-            "relUrl": "/2020/07/28/smart-queuing-system.html",
+            "title": "Computer Point Controller",
+            "content": "Computer Pointer Controller . About . Computer Pointer Controller App is an application used to control the movement of mouse using the gaze estimation model. . The gaze estimation model is used to estimate the gaze of the users’s eyes and it’s feed into the pyautogui module to change the mouse pointer position. . Project can be found https://github.com/emilearthur/computer_pointer_controller .",
+            "url": "https://emilearthur.github.io/fastblog/2020/07/28/computer-point-controller.html",
+            "relUrl": "/2020/07/28/computer-point-controller.html",
             "date": " • Jul 28, 2020"
         }
         
@@ -13,11 +13,11 @@
   
     
         ,"post1": {
-            "title": "Computer Point Controller",
-            "content": "Computer Pointer Controller . About . Computer Pointer Controller App is an application used to control the movement of mouse using the gaze estimation model. . The gaze estimation model is used to estimate the gaze of the users’s eyes and it’s feed into the pyautogui module to change the mouse pointer position. . Project can be found https://github.com/emilearthur/computer_pointer_controller .",
-            "url": "https://emilearthur.github.io/fastblog/2020/07/28/computer-point-controller.html",
-            "relUrl": "/2020/07/28/computer-point-controller.html",
-            "date": " • Jul 28, 2020"
+            "title": "Smart Queuing System",
+            "content": "Computer Pointer Controller . About . Smart queuing system using openvino by Intel . Project can be found https://github.com/emilearthur/smart_queuing_system .",
+            "url": "https://emilearthur.github.io/fastblog/2020/03/22/smart-queuing-system.html",
+            "relUrl": "/2020/03/22/smart-queuing-system.html",
+            "date": " • Mar 22, 2020"
         }
         
     
