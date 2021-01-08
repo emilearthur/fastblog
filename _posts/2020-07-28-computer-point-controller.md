@@ -1,4 +1,11 @@
-# Computer Pointer Controller
+---
+toc: true
+layout: post
+<!---description: A minimal example of using markdown with fastpages.-->
+categories: [edge, python, intel]
+title: Computer Pointer Controller
+---
+
 
 ## `About`
 Computer Pointer Controller App is an application used to control the movement of mouse using the gaze estimation model.
