@@ -1,7 +1,7 @@
 ---
 toc: true
 layout: post
-<!---description: Here it's about me (career wise).-->
+description: Here it's about me (career wise)
 categories: [about, career]
 title: Why You NEED ME!
 ---
