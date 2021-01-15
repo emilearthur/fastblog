@@ -6,6 +6,7 @@ categories: [about, career]
 title: Why You NEED ME!
 ---
 
+
 Hi👋  There!, 
 
 You are building a great product, and I love it - I love innovation and disruption too. Also, I hope you have a good culture, which one can innovate, grow and learn, at the same time.
