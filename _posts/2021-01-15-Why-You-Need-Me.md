@@ -10,7 +10,7 @@ Hi👋  There!,
 
 You are building a great product, and I love it. Also, I hope you have a good culture, which one can innovate, grow and learn, at the same time.
 
-If as such, here I the reasons I think you need me for a product manager, product analyst, data analyst/scientist, or business analyst gig. 
+If there is, here are the reasons I think you need me for a product manager, product analyst, data analyst/scientist, or business analyst positions. 
 
 * I have almost three years of experience in data analysis, business analysis and product management, and, have two-plus years of experience working with 
 Python (scikit-learn, pandas, fastai, PyTorch, numpy), excel (Advance), and SQL(Intermediate). <i>Maybe, many people have these.
