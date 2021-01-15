@@ -8,7 +8,7 @@ title: Why You NEED ME!
 
 Hi👋  There!, 
 
-You are building a great product, and I love it. Also, I hope you have a good culture, which one can innovate, grow and learn, at the same time.
+You are building a great product, and I love it - I love innovation and disruption. Also, I hope you have a good culture, which one can innovate, grow and learn, at the same time.
 
 If there is, here are the reasons I think you need me for a product manager, product analyst, data analyst/scientist, or business analyst positions. 
 
