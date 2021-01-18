@@ -13,7 +13,7 @@ You are building a great product, and I love it - I love innovation and disrupti
 
 If there is, here are the reasons I think you need me for a product manager, product analyst, data analyst/scientist, or business analyst positions. 
 
-* I have almost three years of experience in data analysis, business analysis and product management, and, have two-plus years of experience working with 
+* I have almost three years of experience in data analysis, business analysis and product management in the B2C fintech industry, and, have two-plus years of experience working with 
 Python (scikit-learn, pandas, fastai, PyTorch, numpy), excel (Advance), and SQL(Intermediate). <i>Maybe, many people have these.
 * I have two-plus years of startup experience, so I know how to take several responsibilities and make sure the job is complete, delivered, clean, 
 whiles keeping an eye on the greater goal. <i> Not made a decision yet? keep going ... </i>
