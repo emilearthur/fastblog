@@ -3,7 +3,7 @@ toc: true
 layout: post
 description: About Product Management and ME. 
 categories: [about, career,product management]
-title: Product Manger (PM)- What and How- Am I One?
+title: Product Manager (PM)- What and How- Am I One?
 ---
 
 Frequently, I am conflicted when I'm asked, Are you doing PM stuff? Are you a PM?; and What is a PM?
