@@ -44,7 +44,7 @@ For me, I'm not special and, from what I have done and what I continue to do in 
 
 Thanks for reading my article, and I hope you enjoyed it and also discover yourself.
 
-**I am Frederick Emile Bondzie-Arthur, a Business and Systems Analyst and Product and Information Technology lead at Fido MicroCredit Limited. Aside PM stuff, I have skills in backed dev (Python: Django Rest Framework and FastAPI, Learning Go), Machine Learning and Deep Learning.**
+**I am Frederick Emile Bondzie-Arthur, a Business and Systems Analyst and Product and Information Technology lead at [Fido MicroCredit Limited](http://www.fidocredit.com/). Aside PM stuff, I have skills in backed dev (Python: Django Rest Framework and FastAPI, Learning Go), Machine Learning and Deep Learning. You can find my work at [github](https://github.com/emilearthur)**
 
 ### __Reference__
 
