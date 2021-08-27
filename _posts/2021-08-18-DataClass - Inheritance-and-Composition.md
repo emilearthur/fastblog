@@ -161,11 +161,25 @@ commission_employee = CommissionEmployee(3, 'Kevin Bacon', 1000, 250)
 
 payroll_system = PayrollSystem()
 payroll_system.calculate_payroll([salary_employee, hourly_employee, commission_employee])
-```
+
+````
 
 Running the progam and results below;
 
-![Payroll_sys <](/images/payroll_system.png)
+``` text
+# output below
+
+Calculating Payroll
+===================
+Payroll for: 1 - Sam May
+- Check amount: 1500
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+```
 
 As you can see, three employee objects was created, passed on the payroll system, which in turn used the `calculate_payroll` method to calculate the payroll for each employee and prints the results.
 
@@ -215,7 +229,20 @@ class CommissionEmployee(SalaryEmployee):
 
 Testing our implementation as done above, we get same results below;
 
-![Payroll alt <](/images/payroll_system.png)
+``` text
+# output below
+
+Calculating Payroll
+===================
+Payroll for: 1 - Sam May
+- Check amount: 1500
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+```
 
 We can even go further and extend the derived class to create another derived classes and further add method `work` to it as below.
 
@@ -242,7 +269,7 @@ class FactoryWorker(HourlyEmployee):
 
 To test our `work` method is working we create productivity platform, which display the work and hours the employee does.
 
-```Python
+```python
 import Employee
 from typing import Union, List
 
@@ -281,7 +308,35 @@ payroll_system.calculate_payroll(company_employees)
 
 Running our code above we get the output below, which indicate all is fine as expected.
 
-![Program output <](/images/program_output.png)
+```text
+# output below
+
+Tracking Employee Productivity
+==============================
+Mary Poppins screams and yells for 40 hours
+Mary Poppins: None
+John Smith expands 40 hours doing office paperwork
+John Smith: None
+Kevin Bacon expands 40 hours on the phone
+Kevin Bacon: None
+Jane Doe manufactures gadgets for 40 hours
+Jane Doe: None
+
+Calculating Payroll
+===================
+Payroll for: 1 - Mary Poppins
+- Check amount: 3000
+
+Payroll for: 2 - John Smith
+- Check amount: 1500
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+```
 
 To further test how multiple inheritance work for dataclasses, we will go ahead and create other functions, then perfrom some multiple inheritance here.
 
@@ -438,7 +493,35 @@ payroll_system.calculate_payroll(employees=employees)
 
 Running the code above, as done ealier we get the same output as ealier.
 
-![Program output <](/images/program_output.png)
+```text
+# output below
+
+Tracking Employee Productivity
+==============================
+Mary Poppins screams and yells for 40 hours
+Mary Poppins: None
+John Smith expands 40 hours doing office paperwork
+John Smith: None
+Kevin Bacon expands 40 hours on the phone
+Kevin Bacon: None
+Jane Doe manufactures gadgets for 40 hours
+Jane Doe: None
+
+Calculating Payroll
+===================
+Payroll for: 1 - Mary Poppins
+- Check amount: 3000
+
+Payroll for: 2 - John Smith
+- Check amount: 1500
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+```
 
 ## __Compostion Here__
 
@@ -487,7 +570,16 @@ print(address2)
 
 This gives output
 
-![Address output <](/images/Address_class_output.png)
+```text
+# output below
+
+55 main st.
+concord, NH 03301
+55 main st.
+denso
+concord, NH 03301
+
+```
 
 Since all is working as expected, we modify the `Employee` class by adding the `Address` class as a composite.
 
@@ -563,7 +655,39 @@ payroll_system.calculate_payroll(employees)
 
 Running the code above, as done ealier we get the same output as ealier.
 
-![Program output <](/images/program_composition.png)
+```text
+Tracking Employee Productivity
+==============================
+Mary Poppins: screams and yells for 40 hours.
+John Smith: expands 40 hours doing office paperwork.
+Kevin Bacon: expands 40 hours on phone.
+Jane Doe: manufactures gadgets for 40 hours.
+Robin Williams: expands 40 hours doing office paperwork.
+
+Calculating Payroll
+===================
+Payroll for: 1 - Mary Poppins
+- Check amount: 3000
+- Sent to:
+121 Admin Rd
+Concord, NH 03301
+
+Payroll for: 2 - John Smith
+- Check amount: 1500
+- Sent to:
+67 Paperwork Ave.
+Manchester, NH 03101
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+Payroll for: 5 - Robin Williams
+- Check amount: 360
+
+```
 
 As we can see the address was printed out if present. As we can see, this design is flexible and we can change `Address` class without having impact on the `Employee` class.
 
@@ -611,8 +735,10 @@ class Employee:
 
 # Testing our implementation
 Employee(name="kwesi")
+```
 
-#output 
+```text
+# output 
 Employee(name='kwesi', id='f6b1f661060d11ec9ec9a44cc81af35c', working_hrs=40)
 ```
 
@@ -652,7 +778,9 @@ class EmployeesDB:
 
 # Testing our implementation
 EmployeesDB().employees
+```
 
+```text
 #output 
 [{'emp1': Employee(name='Doe', id='b6809f19061111ec86cba44cc81af35c', working_hrs=40),
   'emp2': Employee(name='Jane', id='b680a0cc061111ecb53ca44cc81af35c', working_hrs=50),
