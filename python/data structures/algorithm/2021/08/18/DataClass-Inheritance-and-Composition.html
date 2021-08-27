@@ -77,7 +77,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      13 min read
+      15 min read
     
 </span></p>
 
@@ -267,11 +267,24 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
 
 <span class="n">payroll_system</span> <span class="o">=</span> <span class="n">PayrollSystem</span><span class="p">()</span>
 <span class="n">payroll_system</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">([</span><span class="n">salary_employee</span><span class="p">,</span> <span class="n">hourly_employee</span><span class="p">,</span> <span class="n">commission_employee</span><span class="p">])</span>
+
 </code></pre></div></div>
 
 <p>Running the progam and results below;</p>
 
-<p><img src="/images/payroll_system.png" alt="Payroll_sys &lt;"></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output below
+
+Calculating Payroll
+===================
+Payroll for: 1 - Sam May
+- Check amount: 1500
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+</code></pre></div></div>
 
 <p>As you can see, three employee objects was created, passed on the payroll system, which in turn used the <code class="language-plaintext highlighter-rouge">calculate_payroll</code> method to calculate the payroll for each employee and prints the results.</p>
 
@@ -322,7 +335,19 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
 
 <p>Testing our implementation as done above, we get same results below;</p>
 
-<p><img src="/images/payroll_system.png" alt="Payroll alt &lt;"></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output below
+
+Calculating Payroll
+===================
+Payroll for: 1 - Sam May
+- Check amount: 1500
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+</code></pre></div></div>
 
 <p>We can even go further and extend the derived class to create another derived classes and further add method <code class="language-plaintext highlighter-rouge">work</code> to it as below.</p>
 
@@ -348,18 +373,18 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
 
 <p>To test our <code class="language-plaintext highlighter-rouge">work</code> method is working we create productivity platform, which display the work and hours the employee does.</p>
 
-<pre><code class="language-Python">import Employee
-from typing import Union, List
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">Employee</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
 
-class ProductivitySystem:
-    def track(self, employees: List[Employee], hours: Union[float, int]) -&gt; None:
-        print("Tracking Employee Productivity")
-        print("==============================")
-        for employee in employees:
-            result = employee.work(hours)
-            print(f'{employee.name}: {result}')
-        print('')
-</code></pre>
+<span class="k">class</span> <span class="nc">ProductivitySystem</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">track</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Employee</span><span class="p">],</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Tracking Employee Productivity"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"=============================="</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">employees</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">employee</span><span class="p">.</span><span class="n">work</span><span class="p">(</span><span class="n">hours</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f'</span><span class="si">{</span><span class="n">employee</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
+</code></pre></div></div>
 
 <p>So far, we expect all our implemenation above to work. Testing, we implement a program (as below) which brings all together.</p>
 
@@ -385,7 +410,34 @@ class ProductivitySystem:
 
 <p>Running our code above we get the output below, which indicate all is fine as expected.</p>
 
-<p><img src="/images/program_output.png" alt="Program output &lt;"></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output below
+
+Tracking Employee Productivity
+==============================
+Mary Poppins screams and yells for 40 hours
+Mary Poppins: None
+John Smith expands 40 hours doing office paperwork
+John Smith: None
+Kevin Bacon expands 40 hours on the phone
+Kevin Bacon: None
+Jane Doe manufactures gadgets for 40 hours
+Jane Doe: None
+
+Calculating Payroll
+===================
+Payroll for: 1 - Mary Poppins
+- Check amount: 3000
+
+Payroll for: 2 - John Smith
+- Check amount: 1500
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+</code></pre></div></div>
 
 <p>To further test how multiple inheritance work for dataclasses, we will go ahead and create other functions, then perfrom some multiple inheritance here.</p>
 
@@ -539,7 +591,34 @@ class ProductivitySystem:
 
 <p>Running the code above, as done ealier we get the same output as ealier.</p>
 
-<p><img src="/images/program_output.png" alt="Program output &lt;"></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output below
+
+Tracking Employee Productivity
+==============================
+Mary Poppins screams and yells for 40 hours
+Mary Poppins: None
+John Smith expands 40 hours doing office paperwork
+John Smith: None
+Kevin Bacon expands 40 hours on the phone
+Kevin Bacon: None
+Jane Doe manufactures gadgets for 40 hours
+Jane Doe: None
+
+Calculating Payroll
+===================
+Payroll for: 1 - Mary Poppins
+- Check amount: 3000
+
+Payroll for: 2 - John Smith
+- Check amount: 1500
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+</code></pre></div></div>
 
 <h2 id="compostion-here">
 <a class="anchor" href="#compostion-here" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Compostion Here</strong>
@@ -588,7 +667,15 @@ class ProductivitySystem:
 
 <p>This gives output</p>
 
-<p><img src="/images/Address_class_output.png" alt="Address output &lt;"></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output below
+
+55 main st.
+concord, NH 03301
+55 main st.
+denso
+concord, NH 03301
+
+</code></pre></div></div>
 
 <p>Since all is working as expected, we modify the <code class="language-plaintext highlighter-rouge">Employee</code> class by adding the <code class="language-plaintext highlighter-rouge">Address</code> class as a composite.</p>
 
@@ -661,7 +748,38 @@ class ProductivitySystem:
 
 <p>Running the code above, as done ealier we get the same output as ealier.</p>
 
-<p><img src="/images/program_composition.png" alt="Program output &lt;"></p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tracking Employee Productivity
+==============================
+Mary Poppins: screams and yells for 40 hours.
+John Smith: expands 40 hours doing office paperwork.
+Kevin Bacon: expands 40 hours on phone.
+Jane Doe: manufactures gadgets for 40 hours.
+Robin Williams: expands 40 hours doing office paperwork.
+
+Calculating Payroll
+===================
+Payroll for: 1 - Mary Poppins
+- Check amount: 3000
+- Sent to:
+121 Admin Rd
+Concord, NH 03301
+
+Payroll for: 2 - John Smith
+- Check amount: 1500
+- Sent to:
+67 Paperwork Ave.
+Manchester, NH 03101
+
+Payroll for: 3 - Kevin Bacon
+- Check amount: 1250
+
+Payroll for: 2 - Jane Doe
+- Check amount: 600
+
+Payroll for: 5 - Robin Williams
+- Check amount: 360
+
+</code></pre></div></div>
 
 <p>As we can see the address was printed out if present. As we can see, this design is flexible and we can change <code class="language-plaintext highlighter-rouge">Address</code> class without having impact on the <code class="language-plaintext highlighter-rouge">Employee</code> class.</p>
 
@@ -709,9 +827,10 @@ class ProductivitySystem:
 
 <span class="c1"># Testing our implementation
 </span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"kwesi"</span><span class="p">)</span>
+</code></pre></div></div>
 
-<span class="c1">#output 
-</span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'kwesi'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'f6b1f661060d11ec9ec9a44cc81af35c'</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output 
+Employee(name='kwesi', id='f6b1f661060d11ec9ec9a44cc81af35c', working_hrs=40)
 </code></pre></div></div>
 
 <p>In the code above, we extended the function in example one by defining a default value for <code class="language-plaintext highlighter-rouge">working_hrs</code> attribute.</p>
@@ -749,11 +868,12 @@ class ProductivitySystem:
 
 <span class="c1"># Testing our implementation
 </span><span class="n">EmployeesDB</span><span class="p">().</span><span class="n">employees</span>
+</code></pre></div></div>
 
-<span class="c1">#output 
-</span><span class="p">[{</span><span class="s">'emp1'</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Doe'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'b6809f19061111ec86cba44cc81af35c'</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">40</span><span class="p">),</span>
-  <span class="s">'emp2'</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Jane'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'b680a0cc061111ecb53ca44cc81af35c'</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">50</span><span class="p">),</span>
-  <span class="s">'emp3'</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Kwesi'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'b680a120061111eca92ca44cc81af35c'</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">20</span><span class="p">)}]</span>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#output 
+[{'emp1': Employee(name='Doe', id='b6809f19061111ec86cba44cc81af35c', working_hrs=40),
+  'emp2': Employee(name='Jane', id='b680a0cc061111ecb53ca44cc81af35c', working_hrs=50),
+  'emp3': Employee(name='Kwesi', id='b680a120061111eca92ca44cc81af35c', working_hrs=20)}]
 </code></pre></div></div>
 
 <p>For more about <code class="language-plaintext highlighter-rouge">field</code> check the official documentation on <a href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">dataclass</a>.</p>
