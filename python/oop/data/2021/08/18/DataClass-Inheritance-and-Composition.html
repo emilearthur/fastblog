@@ -112,6 +112,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#dataclass-field">Dataclass field</a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#reference">Reference</a></li>
 </ul><h2 id="objective">
 <a class="anchor" href="#objective" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Objective</strong>
 </h2>
@@ -130,8 +131,10 @@ window.onload = wrap_img;
 <a class="anchor" href="#dataclasses" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Dataclasses</strong>
 </h2>
 
-<p>In simple terms <code class="language-plaintext highlighter-rouge">Dataclasses</code> are python classes which is suitable for storing objects data.
-Before dataclasses was introducted in python3.7+, one was required to construct an class (object class name Employee) with data <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code> instantiated as such via the <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method.</p>
+<p>In simple terms, <code class="language-plaintext highlighter-rouge">Dataclasses</code> are python classes that are suitable for storing objects data.</p>
+
+<p>Before dataclasses in python3.7+, creating a class with data was a bit of a headache and lots of repetition.
+If we wanted to construct an object class name <code class="language-plaintext highlighter-rouge">Employee</code> with data <code class="language-plaintext highlighter-rouge">id</code> and <code class="language-plaintext highlighter-rouge">name</code>,  the data would be instantiated via the <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
@@ -140,7 +143,7 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
 
 </code></pre></div></div>
 
-<p>However with dataclasses, one would construct the same class with data above as such</p>
+<p>However, with dataclasses, one would construct the same class with data above as such;</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclass</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
@@ -150,9 +153,9 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div></div>
 
-<p>As we can see above, Dataclasses automates the creation of <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method and all we need is to state the object and its type.</p>
+<p>As we can see above, Dataclasses automates the creation of the <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method and, all we need is to state the object and its type(s).</p>
 
-<p>We can even go further and create a method in the dataclass method as such</p>
+<p>We can even go further and create a method in the dataclass object as done below;</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclass</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
@@ -171,7 +174,7 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
 
 <p>From <a href="https://realpython.com/inheritance-composition-python/">realpython’s</a> article, “Inheritance is the mechanism you’ll use to create hierarchies of related classes. These related classes will share a common interface that will be defined in the base classes. Derived classes can specialize the interface by providing a particular implementation where applies”.</p>
 
-<p>Here, we create an HR systems to process payroll for the company’s employees as done in the article.</p>
+<p>As done in <a href="https://realpython.com/inheritance-composition-python/">realpython’s</a> article, we create an HR system to process payroll for the company’s employees.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -192,9 +195,9 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
             <span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>As noted in the comments above the class <code class="language-plaintext highlighter-rouge">PayrollSystem</code> has a method <code class="language-plaintext highlighter-rouge">calculate_payroll</code> which takes collection(i.e. <code class="language-plaintext highlighter-rouge">List</code>) of employees and displays thier <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code> and checks amount using <code class="language-plaintext highlighter-rouge">calculate_payroll()</code> method, which is part of the employee object.</p>
+<p>As noted in the comments above, the class <code class="language-plaintext highlighter-rouge">PayrollSystem</code> has a method <code class="language-plaintext highlighter-rouge">calculate_payroll</code> which takes collection(i.e. <code class="language-plaintext highlighter-rouge">List</code>) of employees and displays their <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code> and checks amount using <code class="language-plaintext highlighter-rouge">calculate_payroll()</code> method, which is part of the employee object.</p>
 
-<p>We go ahead to implement a base class for employee that handles interface for employee types. This base class will futher be iherited by other classes.</p>
+<p>We go ahead to implement a base class for an employee that handles interface for employee types. This base class implemented will further be inherited by other classes.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
@@ -208,7 +211,7 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 </code></pre></div></div>
 
-<p>We further create a class <code class="language-plaintext highlighter-rouge">SalaryEmployee</code> which is a Subclass of the class <code class="language-plaintext highlighter-rouge">Employee</code>.</p>
+<p>We further create a class <code class="language-plaintext highlighter-rouge">SalaryEmployee</code>, a <strong>subclass</strong> of the <strong>parent</strong> class <code class="language-plaintext highlighter-rouge">Employee</code> (implemented earlier).</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
@@ -225,13 +228,18 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
         <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span>
 </code></pre></div></div>
 
-<p>From the code above, we went past inheriting the base class and add <code class="language-plaintext highlighter-rouge">weekly_salary</code> data, plus added a method <code class="language-plaintext highlighter-rouge">calculate_payroll</code> which returns <code class="language-plaintext highlighter-rouge">weekly_salary</code> data.</p>
+<p>From the code above, we did two things;</p>
 
-<p>Running the code above, we will realize the <code class="language-plaintext highlighter-rouge">dataclass</code> decorator automatically initialized <code class="language-plaintext highlighter-rouge">weekly_salary</code> and even initialized the members of the base class.</p>
+<ul>
+  <li>inherited the base class and added the data <code class="language-plaintext highlighter-rouge">weekly_salary</code> to it.</li>
+  <li>plus added a method <code class="language-plaintext highlighter-rouge">calculate_payroll</code> which returns <code class="language-plaintext highlighter-rouge">weekly_salary</code> data.</li>
+</ul>
 
-<p>Guess what, this is one of <code class="language-plaintext highlighter-rouge">dataclass</code> superpowers!.</p>
+<p>Running the code implemented above, we can see that the <code class="language-plaintext highlighter-rouge">dataclass</code> decorator automatically initialized <code class="language-plaintext highlighter-rouge">weekly_salary</code> data and, further initialized the members of the base class.</p>
 
-<p>We can go further and extend our base class in constucting other classes such as <code class="language-plaintext highlighter-rouge">HourEmployees</code> and <code class="language-plaintext highlighter-rouge">CommissionEmployee</code>. We can even add other data to it and create methods as done below.</p>
+<p>Guess what, what happened is one of <code class="language-plaintext highlighter-rouge">dataclass</code> superpowers!.</p>
+
+<p>We can go extra and extend our base class to other classes such as <code class="language-plaintext highlighter-rouge">HourEmployees</code> and <code class="language-plaintext highlighter-rouge">CommissionEmployee</code>; Plus add new data and create methods as done below.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">HourlyEmployee</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
@@ -259,7 +267,7 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
         <span class="k">return</span> <span class="n">fixed</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">commission</span>
 </code></pre></div></div>
 
-<p>Testing our implement above we pass them to the <code class="language-plaintext highlighter-rouge">PayrollSystem</code> class to process payroll;</p>
+<p>Testing our implement, we pass them to the <code class="language-plaintext highlighter-rouge">PayrollSystem</code> class to process payroll;</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">salary_employee</span> <span class="o">=</span> <span class="n">SalaryEmployee</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">"Sam May"</span><span class="p">,</span> <span class="mi">1500</span><span class="p">)</span>
 <span class="n">hourly_employee</span> <span class="o">=</span> <span class="n">HourlyEmployee</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">'Jane Doe'</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
@@ -270,7 +278,7 @@ Before dataclasses was introducted in python3.7+, one was required to construct 
 
 </code></pre></div></div>
 
-<p>Running the progam and results below;</p>
+<p>Running the program and we get the following results.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output below
 
@@ -286,13 +294,13 @@ Payroll for: 3 - Kevin Bacon
 - Check amount: 1250
 </code></pre></div></div>
 
-<p>As you can see, three employee objects was created, passed on the payroll system, which in turn used the <code class="language-plaintext highlighter-rouge">calculate_payroll</code> method to calculate the payroll for each employee and prints the results.</p>
+<p>As you can see, three employee objects were created, passed on to the payroll system, which in turn used the <code class="language-plaintext highlighter-rouge">calculate_payroll</code> method to calculate the payroll for each employee and printed the results.</p>
 
 <h3 id="abstract-base-class-and-dataclass-in-pyton">
 <a class="anchor" href="#abstract-base-class-and-dataclass-in-pyton" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Abstract Base Class and Dataclass in Pyton</strong>
 </h3>
 
-<p>As I noted earlier dataclasses automate automates the creation of <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method. We can also apply python <code class="language-plaintext highlighter-rouge">abc module</code> which provide a functionality to prevent creating objects from abstract base classes.</p>
+<p>As I said earlier, dataclasses automate automates the creation of the <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method. We can also apply python <code class="language-plaintext highlighter-rouge">abc module</code>, which provide the functionality to prevent creating objects from abstract base classes.</p>
 
 <p>Here is an example below;</p>
 
@@ -349,7 +357,7 @@ Payroll for: 3 - Kevin Bacon
 - Check amount: 1250
 </code></pre></div></div>
 
-<p>We can even go further and extend the derived class to create another derived classes and further add method <code class="language-plaintext highlighter-rouge">work</code> to it as below.</p>
+<p>As done before, let’s go further, extend the derived class to create other derived classes and further add method <code class="language-plaintext highlighter-rouge">work</code>, which prints out the work an employee does.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="n">SalaryEmployee</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -371,7 +379,7 @@ Payroll for: 3 - Kevin Bacon
 
 </code></pre></div></div>
 
-<p>To test our <code class="language-plaintext highlighter-rouge">work</code> method is working we create productivity platform, which display the work and hours the employee does.</p>
+<p>To test if our <code class="language-plaintext highlighter-rouge">work</code> method is work? We create a productivity platform, which displays the work and hours the employee does.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">Employee</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span>
@@ -386,7 +394,7 @@ Payroll for: 3 - Kevin Bacon
         <span class="k">print</span><span class="p">(</span><span class="s">''</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>So far, we expect all our implemenation above to work. Testing, we implement a program (as below) which brings all together.</p>
+<p>So far, all our implementations are working and putting it together should work too! Putting it all together, we implement a program (as below) that tell us about the Employees productivity and their Calculate their Payroll.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">PayrollSystem</span>
 <span class="kn">import</span> <span class="nn">Manager</span><span class="p">,</span> <span class="n">Secretary</span><span class="p">,</span> <span class="n">SalesPerson</span><span class="p">,</span> <span class="n">FactoryWorker</span>
@@ -408,7 +416,7 @@ Payroll for: 3 - Kevin Bacon
 
 </code></pre></div></div>
 
-<p>Running our code above we get the output below, which indicate all is fine as expected.</p>
+<p>Running our code, we get the output below as expected (Sorry, I did not write tests), which indicate all is fine as expected.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output below
 
@@ -439,9 +447,9 @@ Payroll for: 2 - Jane Doe
 
 </code></pre></div></div>
 
-<p>To further test how multiple inheritance work for dataclasses, we will go ahead and create other functions, then perfrom some multiple inheritance here.</p>
+<p>To test how multiple <strong>inheritance</strong> works in dataclasses, we create other classes, which inherit two or three dataclass objects.</p>
 
-<p>We go ahead to add other roles and policies for employees.</p>
+<p>Let’s go ahead and create <strong>roles</strong> and <strong>policies</strong>, which will be inherited and used by other classes.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
@@ -486,7 +494,7 @@ Payroll for: 2 - Jane Doe
         <span class="k">return</span> <span class="n">fixed</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">commission</span>
 </code></pre></div></div>
 
-<p>We go further to modify some class implemented earlier which make use of multiple inheritance.</p>
+<p>We further modify some classes implemented earlier, which make use of the roles and policies created (Multiple inheritance here)</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -560,13 +568,13 @@ Payroll for: 2 - Jane Doe
 
 </code></pre></div></div>
 
-<p>From the code above, I guess you’re wondering there is the use of <code class="language-plaintext highlighter-rouge">__post_init__</code> method and its purpose.</p>
+<p>Lots of code above, right? Plus, I guess you’re wondering the use and purpose of the <code class="language-plaintext highlighter-rouge">__post_init__</code> method.</p>
 
-<p>Though <code class="language-plaintext highlighter-rouge">dataclass</code> decorator automate creation of <code class="language-plaintext highlighter-rouge">__init__</code> method for us, we would like to get control of this process to tune it for our use. Including <code class="language-plaintext highlighter-rouge">__post_init__</code> in our class, we can provide other instruction for modifying fields or even instantiate other data.</p>
+<p>Though the <code class="language-plaintext highlighter-rouge">dataclass</code> decorator automates the creation of the <code class="language-plaintext highlighter-rouge">__init__</code> method, at some point, we would like to get control of this process to tune it for our use. Including <code class="language-plaintext highlighter-rouge">__post_init__</code> in our class, we can provide other instructions for modifying fields or even instantiate other data as we please.</p>
 
-<p>As you can see in the <code class="language-plaintext highlighter-rouge">Manager</code> class, we inherited Employee, ManagerRole, SalaryPolicy class and used <code class="language-plaintext highlighter-rouge">__post_init__</code> to initialize <code class="language-plaintext highlighter-rouge">SalaryPolicy</code> class. We also used <code class="language-plaintext highlighter-rouge">super()</code>, which allows us to call methods of the superclass in our subclass.</p>
+<p>As you can see in the <code class="language-plaintext highlighter-rouge">Manager</code> class, we inherited Employee, ManagerRole, SalaryPolicy classes and used <code class="language-plaintext highlighter-rouge">__post_init__</code> to initialize the <code class="language-plaintext highlighter-rouge">SalaryPolicy</code> class. We also used <code class="language-plaintext highlighter-rouge">super()</code>, which allows us to call methods of the superclass in our subclass.</p>
 
-<p>To test our multple inheritance, we modify our program as done below</p>
+<p>To test our multiple inheritance, we modify our program as done below;</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">Manager</span><span class="p">,</span> <span class="n">Secretary</span><span class="p">,</span> <span class="n">SalesPerson</span><span class="p">,</span> <span class="n">FactoryWorker</span><span class="p">,</span> <span class="n">TemporarySecretary</span>
 <span class="kn">import</span> <span class="nn">PayrollSystem</span>
@@ -589,7 +597,7 @@ Payroll for: 2 - Jane Doe
 <span class="n">payroll_system</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">(</span><span class="n">employees</span><span class="o">=</span><span class="n">employees</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Running the code above, as done ealier we get the same output as ealier.</p>
+<p>Running the code above, as done earlier, we get the same output as earlier.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># output below
 
@@ -626,11 +634,11 @@ Payroll for: 2 - Jane Doe
 
 <p>From <a href="https://realpython.com/inheritance-composition-python/">realpython’s</a> article, “Composition is an OO design concept that models has a realationship. In composition, a class known as composite contains an object of another class known to as components”.</p>
 
-<p>One advantage of composition compared to inheritance is, one component can be changed and such change can rarely affect the composite class. Vice versa a change in the composite class does not affect the component class.</p>
+<p>One advantage of composition compared to inheritance is; a change in one component rarely affects the composite class. Vice versa, a change in the composite class rarely affect the component class. In fact, this advantage enables code adaptability and code base changes without introducing problems.</p>
 
 <p>This advantage enables code adaptability and code base changes without introducing problems.</p>
 
-<p>Lets go ahead and implement a Address class which components of an address using <code class="language-plaintext highlighter-rouge">dataclass</code>;</p>
+<p>Let’s go ahead and implement an Address class which components of an address using <code class="language-plaintext highlighter-rouge">dataclass</code>;</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
@@ -653,9 +661,9 @@ Payroll for: 2 - Jane Doe
         <span class="k">return</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>In the code above, we implement the <code class="language-plaintext highlighter-rouge">__str__</code> method which provides us with pretty implementation of our <code class="language-plaintext highlighter-rouge">Address</code> object.</p>
+<p>We implemented the <code class="language-plaintext highlighter-rouge">__str__</code> method in the code above to provides us with a pretty implementation of our <code class="language-plaintext highlighter-rouge">Address</code> object.</p>
 
-<p>Testing our implmentation works, we run the following code</p>
+<p>Testing our implementation works, we run the following code.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">address1</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="n">street</span><span class="o">=</span><span class="s">"55 main st."</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s">"concord"</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s">"NH"</span><span class="p">,</span> <span class="n">zipcode</span><span class="o">=</span><span class="s">"03301"</span><span class="p">)</span>
 
@@ -694,7 +702,7 @@ concord, NH 03301
     <span class="n">address</span><span class="p">:</span> <span class="n">Address</span> <span class="o">=</span> <span class="bp">None</span>
 </code></pre></div></div>
 
-<p>We further go ahead and modify the <code class="language-plaintext highlighter-rouge">PayrollSystem</code> class to print employees address if present.</p>
+<p>We further modify the <code class="language-plaintext highlighter-rouge">PayrollSystem</code> class to print employees address if present.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
@@ -718,7 +726,7 @@ concord, NH 03301
             <span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>We also modify our program to include <code class="language-plaintext highlighter-rouge">Address</code> as done below</p>
+<p>We also modify our program to include <code class="language-plaintext highlighter-rouge">Address</code> as done below;</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">Manager</span><span class="p">,</span> <span class="n">Secretary</span><span class="p">,</span> <span class="n">SalesPerson</span><span class="p">,</span> <span class="n">FactoryWorker</span><span class="p">,</span> <span class="n">TemporarySecretary</span>
 <span class="kn">import</span> <span class="nn">Address</span>
@@ -746,7 +754,7 @@ concord, NH 03301
 <span class="n">payroll_system</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">(</span><span class="n">employees</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Running the code above, as done ealier we get the same output as ealier.</p>
+<p>Running the code above, as done earlier, we get the same output as earlier.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tracking Employee Productivity
 ==============================
@@ -781,15 +789,19 @@ Payroll for: 5 - Robin Williams
 
 </code></pre></div></div>
 
-<p>As we can see the address was printed out if present. As we can see, this design is flexible and we can change <code class="language-plaintext highlighter-rouge">Address</code> class without having impact on the <code class="language-plaintext highlighter-rouge">Employee</code> class.</p>
+<p>As we can see, we print out the address if present. Also, this design is flexible and, we can change the <code class="language-plaintext highlighter-rouge">Address</code> class without having an impact on the <code class="language-plaintext highlighter-rouge">Employee</code> class.</p>
 
 <h3 id="dataclass-field">
 <a class="anchor" href="#dataclass-field" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Dataclass <code class="language-plaintext highlighter-rouge">field</code></strong>
 </h3>
 
-<p>As you can see, using <code class="language-plaintext highlighter-rouge">dataclass</code> is cool and simple. However, in some cases, we will require or like to customize our <code class="language-plaintext highlighter-rouge">dataclass</code> field. This is where we the use of <code class="language-plaintext highlighter-rouge">field</code> comes to play. Also, with the <code class="language-plaintext highlighter-rouge">default</code> parameter, we can define the default value of our attributes we declared.</p>
+<p>As you can see, using <code class="language-plaintext highlighter-rouge">dataclass</code> is super cool and simple.</p>
 
-<p>Example One: We use <code class="language-plaintext highlighter-rouge">field</code> to define default values from a function for an attributes:</p>
+<p>However, in some cases, we will require or like to customize our <code class="language-plaintext highlighter-rouge">dataclass</code> field and, this is where the use of <code class="language-plaintext highlighter-rouge">field</code> comes to play.</p>
+
+<p>With the <code class="language-plaintext highlighter-rouge">default</code> parameter in <code class="language-plaintext highlighter-rouge">field</code>, we can define the default value of the attributes declared. Below are some examples.</p>
+
+<p>Example One: We use <code class="language-plaintext highlighter-rouge">field</code> to define default values from a function for an attribute:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">uuid</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
@@ -804,12 +816,13 @@ Payroll for: 5 - Robin Williams
 
 <span class="c1"># Testing our implementation
 </span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"kwesi"</span><span class="p">)</span>
-
-<span class="c1">#output 
-</span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'kwesi'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'54073e27060b11ec85e6a44cc81af35c'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>In the code above, we have a function that generate a random id using <code class="language-plaintext highlighter-rouge">uuid</code> and <code class="language-plaintext highlighter-rouge">Employee</code> class attribute <code class="language-plaintext highlighter-rouge">id</code> uses it.</p>
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#output 
+Employee(name='kwesi', id='54073e27060b11ec85e6a44cc81af35c')
+</code></pre></div></div>
+
+<p>In the code above, we have a function that generates a random id using <code class="language-plaintext highlighter-rouge">uuid</code> and <code class="language-plaintext highlighter-rouge">Employee</code> class attribute <code class="language-plaintext highlighter-rouge">id</code> uses it.</p>
 
 <p>Example Two: We use <code class="language-plaintext highlighter-rouge">field</code> to define default values for a class attribute.</p>
 
@@ -835,7 +848,9 @@ Employee(name='kwesi', id='f6b1f661060d11ec9ec9a44cc81af35c', working_hrs=40)
 
 <p>In the code above, we extended the function in example one by defining a default value for <code class="language-plaintext highlighter-rouge">working_hrs</code> attribute.</p>
 
-<p>Example Three: Here things get a bit complicated. We create a new class <code class="language-plaintext highlighter-rouge">EmployeeDB</code>, which we use <code class="language-plaintext highlighter-rouge">field</code> to define the class attribute <code class="language-plaintext highlighter-rouge">_employees</code>. We further use <code class="language-plaintext highlighter-rouge">__post_init__</code> to modify the  <code class="language-plaintext highlighter-rouge">_employees</code> data and finally we created a method to display all <code class="language-plaintext highlighter-rouge">_employees</code> when called.</p>
+<p>Example Three: Here, things get a bit complicated. We create a new class, <code class="language-plaintext highlighter-rouge">EmployeeDB</code> and use <code class="language-plaintext highlighter-rouge">field</code> to define the class attribute <code class="language-plaintext highlighter-rouge">_employees</code>.</p>
+
+<p>We further use <code class="language-plaintext highlighter-rouge">__post_init__</code> to modify the  <code class="language-plaintext highlighter-rouge">_employees</code> data defined earlier, and finally, we created a method to display all <code class="language-plaintext highlighter-rouge">_employees</code> when called.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">uuid</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
@@ -876,9 +891,16 @@ Employee(name='kwesi', id='f6b1f661060d11ec9ec9a44cc81af35c', working_hrs=40)
   'emp3': Employee(name='Kwesi', id='b680a120061111eca92ca44cc81af35c', working_hrs=20)}]
 </code></pre></div></div>
 
-<p>For more about <code class="language-plaintext highlighter-rouge">field</code> check the official documentation on <a href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">dataclass</a>.</p>
+<h2 id="reference">
+<a class="anchor" href="#reference" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Reference</strong>
+</h2>
 
-<p>Check code on <a href="https://github.com/emilearthur/OOP_inheritance_composition_dataclass">github</a>.</p>
+<ul>
+  <li><a href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">Dataclass Documentation</a></li>
+  <li><a href="https://realpython.com/inheritance-composition-python/">RealPython: Inheritance-Composition-pthon</a></li>
+</ul>
+
+<p>Check code and some other implemenation on my github repo <a href="https://github.com/emilearthur/OOP_inheritance_composition_dataclass">github</a>.</p>
 
   </div><a class="u-url" href="/fastblog/python/oop/data/2021/08/18/DataClass-Inheritance-and-Composition.html" hidden></a>
 </article>
