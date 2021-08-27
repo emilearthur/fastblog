@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Dataclass - Inhertance and Composition | Emile’s Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Dataclass - Inhertance and Composition" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="About Dataclass and objects." />
+<meta property="og:description" content="About Dataclass and objects." />
+<link rel="canonical" href="https://emilearthur.github.io/fastblog/python/data%20structures/algorithm/2021/08/18/DataClass-Inheritance-and-Composition.html" />
+<meta property="og:url" content="https://emilearthur.github.io/fastblog/python/data%20structures/algorithm/2021/08/18/DataClass-Inheritance-and-Composition.html" />
+<meta property="og:site_name" content="Emile’s Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-18T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://emilearthur.github.io/fastblog/python/data%20structures/algorithm/2021/08/18/DataClass-Inheritance-and-Composition.html","@type":"BlogPosting","headline":"Dataclass - Inhertance and Composition","dateModified":"2021-08-18T00:00:00-05:00","datePublished":"2021-08-18T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://emilearthur.github.io/fastblog/python/data%20structures/algorithm/2021/08/18/DataClass-Inheritance-and-Composition.html"},"description":"About Dataclass and objects.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/fastblog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://emilearthur.github.io/fastblog/feed.xml" title="Emile's Blog" /><link rel="shortcut icon" type="image/x-icon" href="/fastblog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/fastblog/">Emile&#39;s Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/fastblog/about/">About Me</a><a class="page-link" href="/fastblog/search/">Search</a><a class="page-link" href="/fastblog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Dataclass - Inhertance and Composition</h1><p class="page-description">About Dataclass and objects.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-08-18T00:00:00-05:00" itemprop="datePublished">
+        Aug 18, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      13 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/fastblog/categories/#python">python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/fastblog/categories/#data structures">data structures</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/fastblog/categories/#algorithm">algorithm</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#objective">Objective</a></li>
+<li class="toc-entry toc-h2"><a href="#dataclasses">Dataclasses</a></li>
+<li class="toc-entry toc-h2"><a href="#back-to-inhertiance">Back to Inhertiance</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#abstract-base-class-and-dataclass-in-pyton">Abstract Base Class and Dataclass in Pyton</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#compostion-here">Compostion Here</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#dataclass-field">Dataclass field</a></li>
+</ul>
+</li>
+</ul><h2 id="objective">
+<a class="anchor" href="#objective" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Objective</strong>
+</h2>
+
+<p>By the end of this article, you should be able to:</p>
+
+<ul>
+  <li>Construct object in dataclasses.</li>
+  <li>Understand and Implment inheritance and composition using dataclasses.</li>
+  <li>Understand <code class="language-plaintext highlighter-rouge">field</code> dataclass.</li>
+</ul>
+
+<p>Before reading this article you must first understand inheritance, composition and some basic python. Visit <a href="https://realpython.com/inheritance-composition-python/">realpython’s</a> for some refresher. Else lets start!.</p>
+
+<h2 id="dataclasses">
+<a class="anchor" href="#dataclasses" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Dataclasses</strong>
+</h2>
+
+<p>In simple terms <code class="language-plaintext highlighter-rouge">Dataclasses</code> are python classes which is suitable for storing objects data.
+Before dataclasses was introducted in python3.7+, one was required to construct an class (object class name Employee) with data <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code> instantiated as such via the <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span> 
+        <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+</code></pre></div></div>
+
+<p>However with dataclasses, one would construct the same class with data above as such</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclass</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</code></pre></div></div>
+
+<p>As we can see above, Dataclasses automates the creation of <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method and all we need is to state the object and its type.</p>
+
+<p>We can even go further and create a method in the dataclass method as such</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclass</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="nf">employeeinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">f"employee name is </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> with id </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="s">"</span>
+</code></pre></div></div>
+
+<h2 id="back-to-inhertiance">
+<a class="anchor" href="#back-to-inhertiance" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Back to Inhertiance</strong>
+</h2>
+
+<p>From <a href="https://realpython.com/inheritance-composition-python/">realpython’s</a> article, “Inheritance is the mechanism you’ll use to create hierarchies of related classes. These related classes will share a common interface that will be defined in the base classes. Derived classes can specialize the interface by providing a particular implementation where applies”.</p>
+
+<p>Here, we create an HR systems to process payroll for the company’s employees as done in the article.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="k">class</span> <span class="nc">PayrollSystem</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">dataclass</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""Takes a collection of employees and prints their id: str, name: str and check amount: float
+        using the .calculate_payroll() method expoed on each employee object.
+
+        Args:
+            employees (List): collection of employees
+        """</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Calculating Payroll"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"==================="</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">employees</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f"Payroll for: </span><span class="si">{</span><span class="n">employee</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="s"> - </span><span class="si">{</span><span class="n">employee</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f"- Check amount: </span><span class="si">{</span><span class="n">employee</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">()</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As noted in the comments above the class <code class="language-plaintext highlighter-rouge">PayrollSystem</code> has a method <code class="language-plaintext highlighter-rouge">calculate_payroll</code> which takes collection(i.e. <code class="language-plaintext highlighter-rouge">List</code>) of employees and displays thier <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code> and checks amount using <code class="language-plaintext highlighter-rouge">calculate_payroll()</code> method, which is part of the employee object.</p>
+
+<p>We go ahead to implement a base class for employee that handles interface for employee types. This base class will futher be iherited by other classes.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="s">"""Base class for Employees. Common interface for every employee type.
+    Constructed with id: int, name: str
+    """</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+</code></pre></div></div>
+
+<p>We further create a class <code class="language-plaintext highlighter-rouge">SalaryEmployee</code> which is a Subclass of the class <code class="language-plaintext highlighter-rouge">Employee</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">SalaryEmployee</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+    <span class="s">"""Salary Employee Inherits Employee base class and add weekly_salary data.
+    """</span>
+    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="s">"""Calulate the payroll and returns pay.
+        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span>
+</code></pre></div></div>
+
+<p>From the code above, we went past inheriting the base class and add <code class="language-plaintext highlighter-rouge">weekly_salary</code> data, plus added a method <code class="language-plaintext highlighter-rouge">calculate_payroll</code> which returns <code class="language-plaintext highlighter-rouge">weekly_salary</code> data.</p>
+
+<p>Running the code above, we will realize the <code class="language-plaintext highlighter-rouge">dataclass</code> decorator automatically initialized <code class="language-plaintext highlighter-rouge">weekly_salary</code> and even initialized the members of the base class.</p>
+
+<p>Guess what, this is one of <code class="language-plaintext highlighter-rouge">dataclass</code> superpowers!.</p>
+
+<p>We can go further and extend our base class in constucting other classes such as <code class="language-plaintext highlighter-rouge">HourEmployees</code> and <code class="language-plaintext highlighter-rouge">CommissionEmployee</code>. We can even add other data to it and create methods as done below.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">HourlyEmployee</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+    <span class="s">"""Hourly Employee Inherits Employee base class and add hours_worked and hour_rate data.
+    """</span>
+    <span class="n">hours_worked</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">hour_rate</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="s">"""Calulate the payroll and returns pay.
+        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">hours_worked</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">hour_rate</span>
+
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">CommissionEmployee</span><span class="p">(</span><span class="n">SalaryEmployee</span><span class="p">):</span>
+    <span class="s">"""Comission Employee Inherits SalaryEmployee base class and add commission data.
+    """</span>
+    <span class="n">commission</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="s">"""Calulate the payroll from SalaryEmployee class using super() and adds commisssion.
+        """</span>
+        <span class="n">fixed</span> <span class="o">=</span> <span class="nb">super</span><span class="p">().</span><span class="n">calculate_payroll</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">fixed</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">commission</span>
+</code></pre></div></div>
+
+<p>Testing our implement above we pass them to the <code class="language-plaintext highlighter-rouge">PayrollSystem</code> class to process payroll;</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">salary_employee</span> <span class="o">=</span> <span class="n">SalaryEmployee</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">"Sam May"</span><span class="p">,</span> <span class="mi">1500</span><span class="p">)</span>
+<span class="n">hourly_employee</span> <span class="o">=</span> <span class="n">HourlyEmployee</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">'Jane Doe'</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">commission_employee</span> <span class="o">=</span> <span class="n">CommissionEmployee</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">'Kevin Bacon'</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+
+<span class="n">payroll_system</span> <span class="o">=</span> <span class="n">PayrollSystem</span><span class="p">()</span>
+<span class="n">payroll_system</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">([</span><span class="n">salary_employee</span><span class="p">,</span> <span class="n">hourly_employee</span><span class="p">,</span> <span class="n">commission_employee</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Running the progam and results below;</p>
+
+<p><img src="/images/payroll_system.png" alt="Payroll alt &lt;"></p>
+
+<p>As you can see, three employee objects was created, passed on the payroll system, which in turn used the <code class="language-plaintext highlighter-rouge">calculate_payroll</code> method to calculate the payroll for each employee and prints the results.</p>
+
+<h3 id="abstract-base-class-and-dataclass-in-pyton">
+<a class="anchor" href="#abstract-base-class-and-dataclass-in-pyton" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Abstract Base Class and Dataclass in Pyton</strong>
+</h3>
+
+<p>As I noted earlier dataclasses automate automates the creation of <code class="language-plaintext highlighter-rouge">__init__()</code> constructor method. We can also apply python <code class="language-plaintext highlighter-rouge">abc module</code> which provide a functionality to prevent creating objects from abstract base classes.</p>
+
+<p>Here is an example below;</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee_</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">SalaryEmployee</span><span class="p">(</span><span class="n">Employee_</span><span class="p">):</span>
+    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">HourlyEmployee</span><span class="p">(</span><span class="n">Employee_</span><span class="p">):</span>
+    <span class="n">hours_worked</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">hour_rate</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">hours_worked</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">hour_rate</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">CommissionEmployee</span><span class="p">(</span><span class="n">SalaryEmployee</span><span class="p">):</span>
+    <span class="n">commission</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="n">fixed</span> <span class="o">=</span> <span class="nb">super</span><span class="p">().</span><span class="n">calculate_payroll</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">fixed</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">commission</span>
+</code></pre></div></div>
+
+<p>Testing our implementation as done above, we get same results below;</p>
+
+<p><img src="/images/payroll_system.png" alt="Payroll alt &lt;"></p>
+
+<p>We can even go further and extend the derived class to create another derived classes and further add method <code class="language-plaintext highlighter-rouge">work</code> to it as below.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="n">SalaryEmployee</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> screams and yells for </span><span class="si">{</span><span class="n">hours</span><span class="si">}</span><span class="s"> hours"</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Secretary</span><span class="p">(</span><span class="n">SalaryEmployee</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> expands </span><span class="si">{</span><span class="n">hours</span><span class="si">}</span><span class="s"> hours doing office paperwork"</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">SalesPerson</span><span class="p">(</span><span class="n">CommissionEmployee</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> expands </span><span class="si">{</span><span class="n">hours</span><span class="si">}</span><span class="s"> hours on the phone"</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">FactoryWorker</span><span class="p">(</span><span class="n">HourlyEmployee</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> manufactures gadgets for </span><span class="si">{</span><span class="n">hours</span><span class="si">}</span><span class="s"> hours"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>To test our <code class="language-plaintext highlighter-rouge">work</code> method is working we create productivity platform, which display the work and hours the employee does.</p>
+
+<pre><code class="language-Python">import Employee
+from typing import Union, List
+
+class ProductivitySystem:
+    def track(self, employees: List[Employee], hours: Union[float, int]) -&gt; None:
+        print("Tracking Employee Productivity")
+        print("==============================")
+        for employee in employees:
+            result = employee.work(hours)
+            print(f'{employee.name}: {result}')
+        print('')
+</code></pre>
+
+<p>So far, we expect all our implemenation above to work. Testing, we implement a program (as below) which brings all together.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">PayrollSystem</span>
+<span class="kn">import</span> <span class="nn">Manager</span><span class="p">,</span> <span class="n">Secretary</span><span class="p">,</span> <span class="n">SalesPerson</span><span class="p">,</span> <span class="n">FactoryWorker</span>
+<span class="kn">import</span> <span class="nn">ProductivitySystem</span>
+
+<span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Mary Poppins'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="n">secretary</span> <span class="o">=</span> <span class="n">Secretary</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'John Smith'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+<span class="n">sales_guy</span> <span class="o">=</span> <span class="n">SalesPerson</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Kevin Bacon'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">commission</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+<span class="n">factory_worker</span> <span class="o">=</span> <span class="n">FactoryWorker</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Jane Doe'</span><span class="p">,</span> <span class="n">hours_worked</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">hour_rate</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+
+<span class="n">company_employees</span> <span class="o">=</span> <span class="p">[</span><span class="n">manager</span><span class="p">,</span> <span class="n">secretary</span><span class="p">,</span> <span class="n">sales_guy</span><span class="p">,</span><span class="n">factory_worker</span><span class="p">,</span> <span class="p">]</span>
+
+<span class="n">productivity_system</span> <span class="o">=</span> <span class="n">ProductivitySystem</span><span class="p">()</span>
+<span class="n">productivity_system</span><span class="p">.</span><span class="n">track</span><span class="p">(</span><span class="n">company_employees</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="n">payroll_system</span> <span class="o">=</span> <span class="n">PayrollSystem</span><span class="p">()</span>
+<span class="n">payroll_system</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">(</span><span class="n">company_employees</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>Running our code above we get the output below, which indicate all is fine as expected.</p>
+
+<p><img src="/images/program_output.png" alt="Program output &lt;"></p>
+
+<p>To further test how multiple inheritance work for dataclasses, we will go ahead and create other functions, then perfrom some multiple inheritance here.</p>
+
+<p>We go ahead to add other roles and policies for employees.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="k">class</span> <span class="nc">ManagerRole</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">f"screams and yells for </span><span class="si">{</span><span class="n">hours</span><span class="si">}</span><span class="s"> hours."</span>
+
+<span class="k">class</span> <span class="nc">SecretaryRole</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">f"expands </span><span class="si">{</span><span class="n">hours</span><span class="si">}</span><span class="s"> hours doing office paperwork."</span>
+
+<span class="k">class</span> <span class="nc">SalesRole</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">f"expands </span><span class="si">{</span><span class="n">hours</span><span class="si">}</span><span class="s"> hours on phone."</span>
+
+<span class="k">class</span> <span class="nc">FactoryRole</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s">f"manufactures gadgets for </span><span class="si">{</span><span class="n">hours</span><span class="si">}</span><span class="s"> hours."</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">SalaryPolicy</span><span class="p">:</span>
+    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">HourlyPolicy</span><span class="p">:</span>
+    <span class="n">hours_worked</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">hour_rate</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">hours_worked</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">hour_rate</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">CommissionPolicy</span><span class="p">(</span><span class="n">SalaryPolicy</span><span class="p">):</span>
+    <span class="n">commission</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="n">fixed</span> <span class="o">=</span> <span class="nb">super</span><span class="p">().</span><span class="n">calculate_payroll</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">fixed</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">commission</span>
+</code></pre></div></div>
+
+<p>We go further to modify some class implemented earlier which make use of multiple inheritance.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">SalaryPolicy</span><span class="p">,</span> <span class="n">CommissionPolicy</span><span class="p">,</span> <span class="n">HourlyPolicy</span>
+<span class="kn">import</span> <span class="nn">ManagerRole</span><span class="p">,</span> <span class="n">SecretaryRole</span><span class="p">,</span> <span class="n">SalesRole</span><span class="p">,</span> <span class="n">FactoryRole</span>
+
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">():</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">ManagerRole</span><span class="p">,</span> <span class="n">SalaryPolicy</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">SalaryPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Secretary</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">SecretaryRole</span><span class="p">,</span> <span class="n">SalaryPolicy</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">SalaryPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">SalesPerson</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">SalesRole</span><span class="p">,</span> <span class="n">CommissionPolicy</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">commission</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">CommissionPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">commission</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">FactoryWorker</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">FactoryRole</span><span class="p">,</span> <span class="n">HourlyPolicy</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">hours_worked</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">hour_rate</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">HourlyPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">hours_worked</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">hour_rate</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">TemporarySecretary</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">SecretaryRole</span><span class="p">,</span> <span class="n">HourlyPolicy</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">hours_worked</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">hour_rate</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">HourlyPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">hours_worked</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">hour_rate</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>From the code above, I guess you’re wondering there is the use of <code class="language-plaintext highlighter-rouge">__post_init__</code> method and its purpose.</p>
+
+<p>Though <code class="language-plaintext highlighter-rouge">dataclass</code> decorator automate creation of <code class="language-plaintext highlighter-rouge">__init__</code> method for us, we would like to get control of this process to tune it for our use. Including <code class="language-plaintext highlighter-rouge">__post_init__</code> in our class, we can provide other instruction for modifying fields or even instantiate other data.</p>
+
+<p>As you can see in the <code class="language-plaintext highlighter-rouge">Manager</code> class, we inherited Employee, ManagerRole, SalaryPolicy class and used <code class="language-plaintext highlighter-rouge">__post_init__</code> to initialize <code class="language-plaintext highlighter-rouge">SalaryPolicy</code> class. We also used <code class="language-plaintext highlighter-rouge">super()</code>, which allows us to call methods of the superclass in our subclass.</p>
+
+<p>To test our multple inheritance, we modify our program as done below</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">Manager</span><span class="p">,</span> <span class="n">Secretary</span><span class="p">,</span> <span class="n">SalesPerson</span><span class="p">,</span> <span class="n">FactoryWorker</span><span class="p">,</span> <span class="n">TemporarySecretary</span>
+<span class="kn">import</span> <span class="nn">PayrollSystem</span>
+<span class="kn">import</span> <span class="nn">ProductivitySystem</span>
+
+
+<span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Mary Poppins'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="n">secretary</span> <span class="o">=</span> <span class="n">Secretary</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'John Smith'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+<span class="n">sales_guy</span> <span class="o">=</span> <span class="n">SalesPerson</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Kevin Bacon'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">commission</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+<span class="n">factory_worker</span> <span class="o">=</span> <span class="n">FactoryWorker</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Jane Doe'</span><span class="p">,</span> <span class="n">hours_worked</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">hour_rate</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">temporary_secretary</span> <span class="o">=</span> <span class="n">TemporarySecretary</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Robin Williams'</span><span class="p">,</span> <span class="n">hours_worked</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+                                                   <span class="n">hour_rate</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="n">employees</span> <span class="o">=</span> <span class="p">[</span><span class="n">manager</span><span class="p">,</span> <span class="n">secretary</span><span class="p">,</span> <span class="n">sales_guy</span><span class="p">,</span> <span class="n">factory_worker</span><span class="p">,</span> <span class="n">temporary_secretary</span><span class="p">]</span>
+
+<span class="n">productivity_system</span> <span class="o">=</span> <span class="n">ProductivitySystem</span><span class="p">()</span>
+<span class="n">productivity_system</span><span class="p">.</span><span class="n">track</span><span class="p">(</span><span class="n">employees</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="n">payroll_system</span> <span class="o">=</span> <span class="n">PayrollSystem</span><span class="p">()</span>
+<span class="n">payroll_system</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">(</span><span class="n">employees</span><span class="o">=</span><span class="n">employees</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Running the code above, as done ealier we get the same output as ealier.</p>
+
+<p><img src="/images/program_output.png" alt="Program output &lt;"></p>
+
+<h2 id="compostion-here">
+<a class="anchor" href="#compostion-here" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Compostion Here</strong>
+</h2>
+
+<p>From <a href="https://realpython.com/inheritance-composition-python/">realpython’s</a> article, “Composition is an OO design concept that models has a realationship. In composition, a class known as composite contains an object of another class known to as components”.</p>
+
+<p>One advantage of composition compared to inheritance is, one component can be changed and such change can rarely affect the composite class. Vice versa a change in the composite class does not affect the component class.</p>
+
+<p>This advantage enables code adaptability and code base changes without introducing problems.</p>
+
+<p>Lets go ahead and implement a Address class which components of an address using <code class="language-plaintext highlighter-rouge">dataclass</code>;</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Address</span><span class="p">:</span>
+    <span class="n">street</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">city</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">state</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">zipcode</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">street2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s">''</span>
+    
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="s">"""Provides pretty response of address."""</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">street</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">street2</span><span class="p">:</span>
+            <span class="n">lines</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">street2</span><span class="p">)</span>
+        <span class="n">lines</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">f"</span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">city</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">zipcode</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the code above, we implement the <code class="language-plaintext highlighter-rouge">__str__</code> method which provides us with pretty implementation of our <code class="language-plaintext highlighter-rouge">Address</code> object.</p>
+
+<p>Testing our implmentation works, we run the following code</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">address1</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="n">street</span><span class="o">=</span><span class="s">"55 main st."</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s">"concord"</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s">"NH"</span><span class="p">,</span> <span class="n">zipcode</span><span class="o">=</span><span class="s">"03301"</span><span class="p">)</span>
+
+<span class="n">address2</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="n">street</span><span class="o">=</span><span class="s">"55 main st."</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s">"concord"</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s">"NH"</span><span class="p">,</span> <span class="n">zipcode</span><span class="o">=</span><span class="s">"03301"</span><span class="p">,</span> <span class="n">street2</span><span class="o">=</span><span class="s">"denso"</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">address1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">address2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This gives output</p>
+
+<p><img src="/images/Address_class_output.png" alt="Address output &lt;"></p>
+
+<p>Since all is working as expected, we modify the <code class="language-plaintext highlighter-rouge">Employee</code> class by adding the <code class="language-plaintext highlighter-rouge">Address</code> class as a composite.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">Address</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">():</span>
+    <span class="s">"""We making the Employee an abstract base class.  There are two side effects here;
+    * You telling users of the module that objects of type Employee can't be created.
+    * You telling other devs working on the hr module hat if they derive from Employee, the they must 
+    override the .calculate_payroll abstract method."""</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">address</span><span class="p">:</span> <span class="n">Address</span> <span class="o">=</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<p>We further go ahead and modify the <code class="language-plaintext highlighter-rouge">PayrollSystem</code> class to print employees address if present.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="k">class</span> <span class="nc">PayrollSystem</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">calculate_payroll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">employees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">dataclass</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""Takes a collection of employees and prints their id: str, name: str and check amount: float
+        using the .calculate_payroll() method expoed on each employee object.
+
+        Args:
+            employees (List): collection of employees
+        """</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Calculating Payroll"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"==================="</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="n">employees</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f"Payroll for: </span><span class="si">{</span><span class="n">employee</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="s"> - </span><span class="si">{</span><span class="n">employee</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">f"- Check amount: </span><span class="si">{</span><span class="n">employee</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">()</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">employee</span><span class="p">.</span><span class="n">address</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"- Sent to:"</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">employee</span><span class="p">.</span><span class="n">address</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We also modify our program to include <code class="language-plaintext highlighter-rouge">Address</code> as done below</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">Manager</span><span class="p">,</span> <span class="n">Secretary</span><span class="p">,</span> <span class="n">SalesPerson</span><span class="p">,</span> <span class="n">FactoryWorker</span><span class="p">,</span> <span class="n">TemporarySecretary</span>
+<span class="kn">import</span> <span class="nn">Address</span>
+<span class="kn">import</span> <span class="nn">PayrollSystem</span>
+<span class="kn">import</span> <span class="nn">ProductivitySystem</span>
+
+<span class="n">manager</span> <span class="o">=</span> <span class="n">Manager</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Mary Poppins'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="n">manager</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="s">"121 Admin Rd"</span><span class="p">,</span> <span class="s">"Concord"</span><span class="p">,</span> <span class="s">"NH"</span><span class="p">,</span> <span class="s">"03301"</span><span class="p">)</span>
+
+<span class="n">secretary</span> <span class="o">=</span> <span class="n">Secretary</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'John Smith'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
+<span class="n">secretary</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">Address</span><span class="p">(</span><span class="s">'67 Paperwork Ave.'</span><span class="p">,</span> <span class="s">'Manchester'</span><span class="p">,</span>  <span class="s">'NH'</span><span class="p">,</span> <span class="s">'03101'</span><span class="p">)</span>
+
+<span class="n">sales_guy</span> <span class="o">=</span> <span class="n">SalesPerson</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Kevin Bacon'</span><span class="p">,</span> <span class="n">weekly_salary</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">commission</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+
+<span class="n">factory_worker</span> <span class="o">=</span> <span class="n">FactoryWorker</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Jane Doe'</span><span class="p">,</span> <span class="n">hours_worked</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">hour_rate</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">temporary_secretary</span> <span class="o">=</span> <span class="n">TemporarySecretary</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'Robin Williams'</span><span class="p">,</span> <span class="n">hours_worked</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">hour_rate</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="n">employees</span> <span class="o">=</span> <span class="p">[</span><span class="n">manager</span><span class="p">,</span> <span class="n">secretary</span><span class="p">,</span> <span class="n">sales_guy</span><span class="p">,</span> <span class="n">factory_worker</span><span class="p">,</span> <span class="n">temporary_secretary</span><span class="p">,]</span>
+
+<span class="n">productivity_system</span> <span class="o">=</span> <span class="n">ProductivitySystem</span><span class="p">()</span>
+<span class="n">productivity_system</span><span class="p">.</span><span class="n">track</span><span class="p">(</span><span class="n">employees</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="n">payroll_system</span> <span class="o">=</span> <span class="n">PayrollSystem</span><span class="p">()</span>
+<span class="n">payroll_system</span><span class="p">.</span><span class="n">calculate_payroll</span><span class="p">(</span><span class="n">employees</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Running the code above, as done ealier we get the same output as ealier.</p>
+
+<p><img src="/images/program_composition.png" alt="Program output &lt;"></p>
+
+<p>As we can see the address was printed out if present. As we can see, this design is flexible and we can change <code class="language-plaintext highlighter-rouge">Address</code> class without having impact on the <code class="language-plaintext highlighter-rouge">Employee</code> class.</p>
+
+<h3 id="dataclass-field">
+<a class="anchor" href="#dataclass-field" aria-hidden="true"><span class="octicon octicon-link"></span></a><strong>Dataclass <code class="language-plaintext highlighter-rouge">field</code></strong>
+</h3>
+
+<p>As you can see, using <code class="language-plaintext highlighter-rouge">dataclass</code> is cool and simple. However, in some cases, we will require or like to customize our <code class="language-plaintext highlighter-rouge">dataclass</code> field. This is where we the use of <code class="language-plaintext highlighter-rouge">field</code> comes to play. Also, with the <code class="language-plaintext highlighter-rouge">default</code> parameter, we can define the default value of our attributes we declared.</p>
+
+<p>Example One: We use <code class="language-plaintext highlighter-rouge">field</code> to define default values from a function for an attributes:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+
+<span class="k">def</span> <span class="nf">gen_random_id</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">uuid</span><span class="p">.</span><span class="n">uuid1</span><span class="p">().</span><span class="nb">hex</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">gen_random_id</span><span class="p">)</span>
+
+<span class="c1"># Testing our implementation
+</span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"kwesi"</span><span class="p">)</span>
+
+<span class="c1">#output 
+</span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'kwesi'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'54073e27060b11ec85e6a44cc81af35c'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the code above, we have a function that generate a random id using <code class="language-plaintext highlighter-rouge">uuid</code> and <code class="language-plaintext highlighter-rouge">Employee</code> class attribute <code class="language-plaintext highlighter-rouge">id</code> uses it.</p>
+
+<p>Example Two: We use <code class="language-plaintext highlighter-rouge">field</code> to define default values for a class attribute.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+
+<span class="k">def</span> <span class="nf">gen_random_id</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">uuid</span><span class="p">.</span><span class="n">uuid1</span><span class="p">().</span><span class="nb">hex</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">gen_random_id</span><span class="p">)</span>
+    <span class="n">working_hrs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># Testing our implementation
+</span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"kwesi"</span><span class="p">)</span>
+
+<span class="c1">#output 
+</span><span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'kwesi'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'f6b1f661060d11ec9ec9a44cc81af35c'</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the code above, we extended the function in example one by defining a default value for <code class="language-plaintext highlighter-rouge">working_hrs</code> attribute.</p>
+
+<p>Example Three: Here things get a bit complicated. We create a new class <code class="language-plaintext highlighter-rouge">EmployeeDB</code>, which we use <code class="language-plaintext highlighter-rouge">field</code> to define the class attribute <code class="language-plaintext highlighter-rouge">_employees</code>. We further use <code class="language-plaintext highlighter-rouge">__post_init__</code> to modify the  <code class="language-plaintext highlighter-rouge">_employees</code> data and finally we created a method to display all <code class="language-plaintext highlighter-rouge">_employees</code> when called.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="k">def</span> <span class="nf">gen_random_id</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">uuid</span><span class="p">.</span><span class="n">uuid1</span><span class="p">().</span><span class="nb">hex</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">gen_random_id</span><span class="p">)</span>
+    <span class="n">working_hrs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">EmployeesDB</span><span class="p">:</span>
+    <span class="n">_employees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Employee</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">Dict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_employees</span> <span class="o">=</span> <span class="p">[{</span>
+            <span class="s">"emp1"</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="s">"Doe"</span><span class="p">),</span>
+            <span class="s">"emp2"</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="s">"Jane"</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">50</span><span class="p">),</span>
+            <span class="s">"emp3"</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="s">"Kwesi"</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
+        <span class="p">}]</span>
+
+    <span class="o">@</span><span class="nb">property</span>
+    <span class="k">def</span> <span class="nf">employees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">employee</span> <span class="k">for</span> <span class="n">employee</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">_employees</span><span class="p">]</span>
+
+
+<span class="c1"># Testing our implementation
+</span><span class="n">EmployeesDB</span><span class="p">().</span><span class="n">employees</span>
+
+<span class="c1">#output 
+</span><span class="p">[{</span><span class="s">'emp1'</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Doe'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'b6809f19061111ec86cba44cc81af35c'</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">40</span><span class="p">),</span>
+  <span class="s">'emp2'</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Jane'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'b680a0cc061111ecb53ca44cc81af35c'</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">50</span><span class="p">),</span>
+  <span class="s">'emp3'</span><span class="p">:</span> <span class="n">Employee</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Kwesi'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'b680a120061111eca92ca44cc81af35c'</span><span class="p">,</span> <span class="n">working_hrs</span><span class="o">=</span><span class="mi">20</span><span class="p">)}]</span>
+</code></pre></div></div>
+
+<p>For more about <code class="language-plaintext highlighter-rouge">field</code> check the official documentation on <a href="https://docs.python.org/3/library/dataclasses.html#dataclasses.field">dataclass</a>.</p>
+
+<p>Check code on <a href="https://github.com/emilearthur/OOP_inheritance_composition_dataclass">github</a>.</p>
+
+  </div><a class="u-url" href="/fastblog/python/data%20structures/algorithm/2021/08/18/DataClass-Inheritance-and-Composition.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/fastblog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/fastblog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/fastblog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Here I write stuff about datascience and might include product management stuff and other thoughts</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/emilearthur" title="emilearthur"><svg class="svg-icon grey"><use xlink:href="/fastblog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/_iamEmile" title="_iamEmile"><svg class="svg-icon grey"><use xlink:href="/fastblog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
