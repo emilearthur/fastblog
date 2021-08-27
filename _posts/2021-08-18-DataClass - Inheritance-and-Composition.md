@@ -2,7 +2,7 @@
 toc: true
 layout: post
 description: About Dataclass and objects.
-categories: [python, data structures, algorithm]
+categories: [python, OOP, data]
 title: Dataclass - Inhertance and Composition
 ---
 
