@@ -18,8 +18,10 @@ Before reading this article you must first understand inheritance, composition a
 
 ## __Dataclasses__
 
-In simple terms `Dataclasses` are python classes which is suitable for storing objects data.
-Before dataclasses was introducted in python3.7+, one was required to construct an class (object class name Employee) with data `id`, `name` instantiated as such via the `__init__()` constructor method.
+In simple terms, `Dataclasses` are python classes that are suitable for storing objects data.
+
+Before dataclasses in python3.7+, creating a class with data was a bit of a headache and lots of repetition.
+If we wanted to construct an object class name `Employee` with data `id` and `name`,  the data would be instantiated via the `__init__()` constructor method.
 
 ```python
 class Employee:
@@ -29,7 +31,7 @@ class Employee:
 
 ```
 
-However with dataclasses, one would construct the same class with data above as such
+However, with dataclasses, one would construct the same class with data above as such;
 
 ```python
 from dataclass import dataclass
@@ -40,9 +42,9 @@ class Employee:
     name: str
 ```
 
-As we can see above, Dataclasses automates the creation of `__init__()` constructor method and all we need is to state the object and its type.
+As we can see above, Dataclasses automates the creation of the `__init__()` constructor method and, all we need is to state the object and its type(s).
 
-We can even go further and create a method in the dataclass method as such
+We can even go further and create a method in the dataclass object as done below;
 
 ```python
 from dataclass import dataclass
@@ -60,7 +62,7 @@ class Employee:
 
 From [realpython's](https://realpython.com/inheritance-composition-python/) article, "Inheritance is the mechanism you’ll use to create hierarchies of related classes. These related classes will share a common interface that will be defined in the base classes. Derived classes can specialize the interface by providing a particular implementation where applies".
 
-Here, we create an HR systems to process payroll for the company's employees as done in the article.
+As done in [realpython's](https://realpython.com/inheritance-composition-python/) article, we create an HR system to process payroll for the company's employees.
 
 ```python
 from typing import List
@@ -82,9 +84,9 @@ class PayrollSystem:
             print("")
 ```
 
-As noted in the comments above the class `PayrollSystem` has a method `calculate_payroll` which takes collection(i.e. `List`) of employees and displays thier `id`, `name` and checks amount using `calculate_payroll()` method, which is part of the employee object.
+As noted in the comments above, the class `PayrollSystem` has a method `calculate_payroll` which takes collection(i.e. `List`) of employees and displays their `id`, `name` and checks amount using `calculate_payroll()` method, which is part of the employee object.
 
-We go ahead to implement a base class for employee that handles interface for employee types. This base class will futher be iherited by other classes.
+We go ahead to implement a base class for an employee that handles interface for employee types. This base class implemented will further be inherited by other classes.
 
 ```python
 from dataclasses import dataclass
@@ -99,7 +101,7 @@ class Employee:
     name: str
 ```
 
-We further create a class `SalaryEmployee` which is a Subclass of the class `Employee`.
+We further create a class `SalaryEmployee`, a **subclass** of the **parent** class `Employee` (implemented earlier).
 
 ```python
 from dataclasses import dataclass
@@ -117,13 +119,16 @@ class SalaryEmployee(Employee):
         return self.weekly_salary
 ```
 
-From the code above, we went past inheriting the base class and add `weekly_salary` data, plus added a method `calculate_payroll` which returns `weekly_salary` data.
+From the code above, we did two things;
 
-Running the code above, we will realize the `dataclass` decorator automatically initialized `weekly_salary` and even initialized the members of the base class.
+* inherited the base class and added the data `weekly_salary` to it.
+* plus added a method `calculate_payroll` which returns `weekly_salary` data.
 
-Guess what, this is one of `dataclass` superpowers!.
+Running the code implemented above, we can see that the `dataclass` decorator automatically initialized `weekly_salary` data and, further initialized the members of the base class.
 
-We can go further and extend our base class in constucting other classes such as `HourEmployees` and `CommissionEmployee`. We can even add other data to it and create methods as done below.
+Guess what, what happened is one of `dataclass` superpowers!.
+
+We can go extra and extend our base class to other classes such as `HourEmployees` and `CommissionEmployee`; Plus add new data and create methods as done below.
 
 ```python
 @dataclass
@@ -152,7 +157,7 @@ class CommissionEmployee(SalaryEmployee):
         return fixed + self.commission
 ```
 
-Testing our implement above we pass them to the `PayrollSystem` class to process payroll;
+Testing our implement, we pass them to the `PayrollSystem` class to process payroll;
 
 ```python
 salary_employee = SalaryEmployee(1, "Sam May", 1500)
@@ -164,7 +169,7 @@ payroll_system.calculate_payroll([salary_employee, hourly_employee, commission_e
 
 ````
 
-Running the progam and results below;
+Running the program and we get the following results.
 
 ``` text
 # output below
@@ -181,11 +186,11 @@ Payroll for: 3 - Kevin Bacon
 - Check amount: 1250
 ```
 
-As you can see, three employee objects was created, passed on the payroll system, which in turn used the `calculate_payroll` method to calculate the payroll for each employee and prints the results.
+As you can see, three employee objects were created, passed on to the payroll system, which in turn used the `calculate_payroll` method to calculate the payroll for each employee and printed the results.
 
 ### __Abstract Base Class and Dataclass in Pyton__
 
-As I noted earlier dataclasses automate automates the creation of `__init__()` constructor method. We can also apply python `abc module` which provide a functionality to prevent creating objects from abstract base classes.
+As I said earlier, dataclasses automate automates the creation of the `__init__()` constructor method. We can also apply python `abc module`, which provide the functionality to prevent creating objects from abstract base classes.
 
 Here is an example below;
 
@@ -244,7 +249,7 @@ Payroll for: 3 - Kevin Bacon
 - Check amount: 1250
 ```
 
-We can even go further and extend the derived class to create another derived classes and further add method `work` to it as below.
+As done before, let's go further, extend the derived class to create other derived classes and further add method `work`, which prints out the work an employee does.
 
 ```python
 class Manager(SalaryEmployee):
@@ -267,7 +272,7 @@ class FactoryWorker(HourlyEmployee):
 
 ```
 
-To test our `work` method is working we create productivity platform, which display the work and hours the employee does.
+To test if our `work` method is work? We create a productivity platform, which displays the work and hours the employee does.
 
 ```python
 import Employee
@@ -283,7 +288,7 @@ class ProductivitySystem:
         print('')
 ```
 
-So far, we expect all our implemenation above to work. Testing, we implement a program (as below) which brings all together.
+So far, all our implementations are working and putting it together should work too! Putting it all together, we implement a program (as below) that tell us about the Employees productivity and their Calculate their Payroll.
 
 ```python
 import PayrollSystem
@@ -306,7 +311,7 @@ payroll_system.calculate_payroll(company_employees)
 
 ```
 
-Running our code above we get the output below, which indicate all is fine as expected.
+Running our code, we get the output below as expected (Sorry, I did not write tests), which indicate all is fine as expected.
 
 ```text
 # output below
@@ -338,9 +343,9 @@ Payroll for: 2 - Jane Doe
 
 ```
 
-To further test how multiple inheritance work for dataclasses, we will go ahead and create other functions, then perfrom some multiple inheritance here.
+To test how multiple **inheritance** works in dataclasses, we create other classes, which inherit two or three dataclass objects.
 
-We go ahead to add other roles and policies for employees.
+Let's go ahead and create **roles** and **policies**, which will be inherited and used by other classes.
 
 ```python
 from dataclasses import dataclass
@@ -386,7 +391,7 @@ class CommissionPolicy(SalaryPolicy):
         return fixed + self.commission
 ```
 
-We go further to modify some class implemented earlier which make use of multiple inheritance.
+We further modify some classes implemented earlier, which make use of the roles and policies created (Multiple inheritance here)
 
 ```python
 
@@ -461,13 +466,13 @@ class TemporarySecretary(Employee, SecretaryRole, HourlyPolicy):
 
 ```
 
-From the code above, I guess you're wondering there is the use of `__post_init__` method and its purpose.
+Lots of code above, right? Plus, I guess you're wondering the use and purpose of the `__post_init__` method.
 
-Though `dataclass` decorator automate creation of `__init__` method for us, we would like to get control of this process to tune it for our use. Including `__post_init__` in our class, we can provide other instruction for modifying fields or even instantiate other data.
+Though the `dataclass` decorator automates the creation of the `__init__` method, at some point, we would like to get control of this process to tune it for our use. Including `__post_init__` in our class, we can provide other instructions for modifying fields or even instantiate other data as we please.
 
-As you can see in the `Manager` class, we inherited Employee, ManagerRole, SalaryPolicy class and used `__post_init__` to initialize `SalaryPolicy` class. We also used `super()`, which allows us to call methods of the superclass in our subclass.
+As you can see in the `Manager` class, we inherited Employee, ManagerRole, SalaryPolicy classes and used `__post_init__` to initialize the `SalaryPolicy` class. We also used `super()`, which allows us to call methods of the superclass in our subclass.
 
-To test our multple inheritance, we modify our program as done below
+To test our multiple inheritance, we modify our program as done below;
 
 ```python
 import Manager, Secretary, SalesPerson, FactoryWorker, TemporarySecretary
@@ -491,7 +496,7 @@ payroll_system = PayrollSystem()
 payroll_system.calculate_payroll(employees=employees)
 ```
 
-Running the code above, as done ealier we get the same output as ealier.
+Running the code above, as done earlier, we get the same output as earlier.
 
 ```text
 # output below
@@ -527,11 +532,11 @@ Payroll for: 2 - Jane Doe
 
 From [realpython's](https://realpython.com/inheritance-composition-python/) article, "Composition is an OO design concept that models has a realationship. In composition, a class known as composite contains an object of another class known to as components".
 
-One advantage of composition compared to inheritance is, one component can be changed and such change can rarely affect the composite class. Vice versa a change in the composite class does not affect the component class.
+One advantage of composition compared to inheritance is; a change in one component rarely affects the composite class. Vice versa, a change in the composite class rarely affect the component class. In fact, this advantage enables code adaptability and code base changes without introducing problems.
 
 This advantage enables code adaptability and code base changes without introducing problems.
 
-Lets go ahead and implement a Address class which components of an address using `dataclass`;
+Let's go ahead and implement an Address class which components of an address using `dataclass`;
 
 ```python
 from dataclasses import dataclass, field
@@ -555,9 +560,9 @@ class Address:
         return "\n".join(lines)
 ```
 
-In the code above, we implement the `__str__` method which provides us with pretty implementation of our `Address` object.
+We implemented the `__str__` method in the code above to provides us with a pretty implementation of our `Address` object.
 
-Testing our implmentation works, we run the following code
+Testing our implementation works, we run the following code.
 
 ```python
 address1 = Address(street="55 main st.", city="concord", state="NH", zipcode="03301")
@@ -599,7 +604,7 @@ class Employee():
     address: Address = None
 ```
 
-We further go ahead and modify the `PayrollSystem` class to print employees address if present.
+We further modify the `PayrollSystem` class to print employees address if present.
 
 ```python
 from typing import List
@@ -624,7 +629,7 @@ class PayrollSystem:
             print("")
 ```
 
-We also modify our program to include `Address` as done below
+We also modify our program to include `Address` as done below;
 
 ```python
 import Manager, Secretary, SalesPerson, FactoryWorker, TemporarySecretary
@@ -653,7 +658,7 @@ payroll_system = PayrollSystem()
 payroll_system.calculate_payroll(employees)
 ```
 
-Running the code above, as done ealier we get the same output as ealier.
+Running the code above, as done earlier, we get the same output as earlier.
 
 ```text
 Tracking Employee Productivity
@@ -689,13 +694,17 @@ Payroll for: 5 - Robin Williams
 
 ```
 
-As we can see the address was printed out if present. As we can see, this design is flexible and we can change `Address` class without having impact on the `Employee` class.
+As we can see, we print out the address if present. Also, this design is flexible and, we can change the `Address` class without having an impact on the `Employee` class.
 
 ### __Dataclass `field`__
 
-As you can see, using `dataclass` is cool and simple. However, in some cases, we will require or like to customize our `dataclass` field. This is where we the use of `field` comes to play. Also, with the `default` parameter, we can define the default value of our attributes we declared.
+As you can see, using `dataclass` is super cool and simple.
 
-Example One: We use `field` to define default values from a function for an attributes:
+However, in some cases, we will require or like to customize our `dataclass` field and, this is where the use of `field` comes to play.
+
+With the `default` parameter in `field`, we can define the default value of the attributes declared. Below are some examples.
+
+Example One: We use `field` to define default values from a function for an attribute:
 
 ```python
 import uuid
@@ -711,12 +720,14 @@ class Employee:
 
 # Testing our implementation
 Employee(name="kwesi")
+```
 
+```text
 #output 
 Employee(name='kwesi', id='54073e27060b11ec85e6a44cc81af35c')
 ```
 
-In the code above, we have a function that generate a random id using `uuid` and `Employee` class attribute `id` uses it.
+In the code above, we have a function that generates a random id using `uuid` and `Employee` class attribute `id` uses it.
 
 Example Two: We use `field` to define default values for a class attribute.
 
@@ -744,7 +755,9 @@ Employee(name='kwesi', id='f6b1f661060d11ec9ec9a44cc81af35c', working_hrs=40)
 
 In the code above, we extended the function in example one by defining a default value for `working_hrs` attribute.
 
-Example Three: Here things get a bit complicated. We create a new class `EmployeeDB`, which we use `field` to define the class attribute `_employees`. We further use `__post_init__` to modify the  `_employees` data and finally we created a method to display all `_employees` when called.
+Example Three: Here, things get a bit complicated. We create a new class, `EmployeeDB` and use `field` to define the class attribute `_employees`.
+
+We further use `__post_init__` to modify the  `_employees` data defined earlier, and finally, we created a method to display all `_employees` when called.
 
 ```python
 import uuid
@@ -787,6 +800,9 @@ EmployeesDB().employees
   'emp3': Employee(name='Kwesi', id='b680a120061111eca92ca44cc81af35c', working_hrs=20)}]
 ```
 
-For more about `field` check the official documentation on [dataclass](https://docs.python.org/3/library/dataclasses.html#dataclasses.field).
+## __Reference__
 
-Check code on [github](https://github.com/emilearthur/OOP_inheritance_composition_dataclass).
+* [Dataclass Documentation](https://docs.python.org/3/library/dataclasses.html#dataclasses.field)
+* [RealPython: Inheritance-Composition-pthon](https://realpython.com/inheritance-composition-python/)
+
+Check code and some other implemenation on my github repo [github](https://github.com/emilearthur/OOP_inheritance_composition_dataclass).
