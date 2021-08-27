@@ -165,7 +165,7 @@ payroll_system.calculate_payroll([salary_employee, hourly_employee, commission_e
 
 Running the progam and results below;
 
-![Payroll alt <](/images/payroll_system.png)
+![Payroll_sys <](/images/payroll_system.png)
 
 As you can see, three employee objects was created, passed on the payroll system, which in turn used the `calculate_payroll` method to calculate the payroll for each employee and prints the results.
 
