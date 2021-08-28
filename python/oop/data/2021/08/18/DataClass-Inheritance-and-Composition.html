@@ -505,15 +505,12 @@ Payroll for: 2 - Jane Doe
 
 
 <span class="o">@</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">Employee</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
 
 <span class="o">@</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">Manager</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">ManagerRole</span><span class="p">,</span> <span class="n">SalaryPolicy</span><span class="p">):</span>
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">SalaryPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span><span class="p">)</span>
@@ -522,9 +519,6 @@ Payroll for: 2 - Jane Doe
 
 <span class="o">@</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">Secretary</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">SecretaryRole</span><span class="p">,</span> <span class="n">SalaryPolicy</span><span class="p">):</span>
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
     
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">SalaryPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span><span class="p">)</span>
@@ -533,10 +527,6 @@ Payroll for: 2 - Jane Doe
 
 <span class="o">@</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">SalesPerson</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">SalesRole</span><span class="p">,</span> <span class="n">CommissionPolicy</span><span class="p">):</span>
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">weekly_salary</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
-    <span class="n">commission</span><span class="p">:</span> <span class="nb">int</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">CommissionPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">weekly_salary</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">commission</span><span class="p">)</span>
@@ -545,10 +535,6 @@ Payroll for: 2 - Jane Doe
 
 <span class="o">@</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">FactoryWorker</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">FactoryRole</span><span class="p">,</span> <span class="n">HourlyPolicy</span><span class="p">):</span>
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">hours_worked</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
-    <span class="n">hour_rate</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">HourlyPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">hours_worked</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">hour_rate</span><span class="p">)</span>
@@ -557,10 +543,6 @@ Payroll for: 2 - Jane Doe
 
 <span class="o">@</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">TemporarySecretary</span><span class="p">(</span><span class="n">Employee</span><span class="p">,</span> <span class="n">SecretaryRole</span><span class="p">,</span> <span class="n">HourlyPolicy</span><span class="p">):</span>
-    <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">hours_worked</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
-    <span class="n">hour_rate</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">HourlyPolicy</span><span class="p">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">hours_worked</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">hour_rate</span><span class="p">)</span>
@@ -692,7 +674,7 @@ concord, NH 03301
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
 
 <span class="o">@</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">Employee</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
     <span class="s">"""We making the Employee an abstract base class.  There are two side effects here;
     * You telling users of the module that objects of type Employee can't be created.
     * You telling other devs working on the hr module hat if they derive from Employee, the they must 
