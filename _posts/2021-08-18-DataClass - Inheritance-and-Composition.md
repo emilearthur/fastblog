@@ -403,15 +403,12 @@ import ManagerRole, SecretaryRole, SalesRole, FactoryRole
 
 
 @dataclass
-class Employee():
+class Employee:
     id: int
     name: str
 
 @dataclass
 class Manager(Employee, ManagerRole, SalaryPolicy):
-    id: int
-    name: str
-    weekly_salary: Union[float, int]
 
     def __post_init__(self):
         SalaryPolicy.__init__(self, self.weekly_salary)
@@ -420,9 +417,6 @@ class Manager(Employee, ManagerRole, SalaryPolicy):
 
 @dataclass
 class Secretary(Employee, SecretaryRole, SalaryPolicy):
-    id: int
-    name: str
-    weekly_salary: Union[float, int]
     
     def __post_init__(self):
         SalaryPolicy.__init__(self, self.weekly_salary)
@@ -431,10 +425,6 @@ class Secretary(Employee, SecretaryRole, SalaryPolicy):
 
 @dataclass
 class SalesPerson(Employee, SalesRole, CommissionPolicy):
-    id: int
-    name: str
-    weekly_salary: Union[float, int]
-    commission: int
 
     def __post_init__(self):
         CommissionPolicy.__init__(self, self.weekly_salary, self.commission)
@@ -443,10 +433,6 @@ class SalesPerson(Employee, SalesRole, CommissionPolicy):
 
 @dataclass
 class FactoryWorker(Employee, FactoryRole, HourlyPolicy):
-    id: int
-    name: str
-    hours_worked: Union[float, int]
-    hour_rate: Union[float, int]
 
     def __post_init__(self):
         HourlyPolicy.__init__(self, self.hours_worked, self.hour_rate)
@@ -455,10 +441,6 @@ class FactoryWorker(Employee, FactoryRole, HourlyPolicy):
 
 @dataclass
 class TemporarySecretary(Employee, SecretaryRole, HourlyPolicy):
-    id: int
-    name: str
-    hours_worked: Union[float, int]
-    hour_rate: Union[float, int]
 
     def __post_init__(self):
         HourlyPolicy.__init__(self, self.hours_worked, self.hour_rate)
@@ -594,7 +576,7 @@ from dataclasses import dataclass
 from typing import Union
 
 @dataclass
-class Employee():
+class Employee:
     """We making the Employee an abstract base class.  There are two side effects here;
     * You telling users of the module that objects of type Employee can't be created.
     * You telling other devs working on the hr module hat if they derive from Employee, the they must 
