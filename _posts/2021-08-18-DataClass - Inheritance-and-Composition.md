@@ -3,7 +3,7 @@ toc: true
 layout: post
 description: About Dataclass and objects.
 categories: [python, OOP, data]
-title: Dataclass - Inhertance and Composition
+title: Dataclass - Inheritance and Composition
 ---
 
 ## __Objective__
